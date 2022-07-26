@@ -1,0 +1,12 @@
+C:\Users\alung\Documents\Cours\Projects\fbr-backend\src\main\java\fr\alng\footapi\filter\CustomAuthenticationFilter.java
+C:\Users\alung\Documents\Cours\Projects\fbr-backend\src\main\java\fr\alng\footapi\model\Role.java
+C:\Users\alung\Documents\Cours\Projects\fbr-backend\src\main\java\fr\alng\footapi\security\DevCorsConfiguration.java
+C:\Users\alung\Documents\Cours\Projects\fbr-backend\src\main\java\fr\alng\footapi\FootApiApplication.java
+C:\Users\alung\Documents\Cours\Projects\fbr-backend\src\main\java\fr\alng\footapi\service\UserServiceImpl.java
+C:\Users\alung\Documents\Cours\Projects\fbr-backend\src\main\java\fr\alng\footapi\security\SecurityConfig.java
+C:\Users\alung\Documents\Cours\Projects\fbr-backend\src\main\java\fr\alng\footapi\repository\RoleRepository.java
+C:\Users\alung\Documents\Cours\Projects\fbr-backend\src\main\java\fr\alng\footapi\controller\UserController.java
+C:\Users\alung\Documents\Cours\Projects\fbr-backend\src\main\java\fr\alng\footapi\filter\CustomAuthorizationFilter.java
+C:\Users\alung\Documents\Cours\Projects\fbr-backend\src\main\java\fr\alng\footapi\model\User.java
+C:\Users\alung\Documents\Cours\Projects\fbr-backend\src\main\java\fr\alng\footapi\repository\UserRepository.java
+C:\Users\alung\Documents\Cours\Projects\fbr-backend\src\main\java\fr\alng\footapi\service\UserService.java
