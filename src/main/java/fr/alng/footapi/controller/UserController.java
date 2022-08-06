@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.alng.footapi.exception.ApiRequestException;
 import fr.alng.footapi.model.Role;
 import fr.alng.footapi.model.User;
 import fr.alng.footapi.service.UserService;
@@ -45,6 +46,9 @@ public class UserController {
     @PostMapping("/user/save")
     public ResponseEntity<User>saveUser(@RequestBody User user){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
+        if(userService.getUser(user.getUsername()) != null) {
+            throw new ApiRequestException("Username already exist. Choose another one.");
+        }
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
 
