@@ -1,10 +1,13 @@
 fr\alng\footapi\controller\RoleToUserForm.class
 fr\alng\footapi\controller\UserController.class
 fr\alng\footapi\model\User.class
+fr\alng\footapi\exception\ApiExceptionHandler.class
+fr\alng\footapi\exception\ApiException.class
 fr\alng\footapi\repository\UserRepository.class
 fr\alng\footapi\security\DevCorsConfiguration.class
 fr\alng\footapi\filter\CustomAuthenticationFilter.class
 fr\alng\footapi\FootApiApplication.class
+fr\alng\footapi\exception\ApiRequestException.class
 fr\alng\footapi\model\Role.class
 fr\alng\footapi\service\UserServiceImpl.class
 fr\alng\footapi\filter\CustomAuthorizationFilter.class

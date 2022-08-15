@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Data
@@ -24,4 +25,14 @@ public class User {
     private Collection<Role> roles = new ArrayList<>();
     private Date birthday;
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    Set<Bet> bets;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_room",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "room_id"))
+    Set<Room> userRooms;
 }
