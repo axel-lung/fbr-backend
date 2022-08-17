@@ -22,6 +22,8 @@ public class Area {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private Long apiId;
+
     private String name;
 
     @Column(name = "country_code")

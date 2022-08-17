@@ -13,4 +13,5 @@ public interface AreaService {
     Area saveArea(Area area);
     Optional<Area> getArea(Long id);
     List<Area> getAreas();
+    Area getAreaByApiId(Long apiId);
 }

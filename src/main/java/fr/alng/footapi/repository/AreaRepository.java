@@ -7,4 +7,5 @@ import fr.alng.footapi.model.Area;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AreaRepository extends JpaRepository<Area, Long> {
+    Area findByApiId(Long apiId);
 }

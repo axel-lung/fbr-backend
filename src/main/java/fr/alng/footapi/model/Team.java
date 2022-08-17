@@ -20,6 +20,7 @@ public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private Long apiId;
     private String name;
     @Column(name = "short_name")
     private String shortName;

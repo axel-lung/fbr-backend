@@ -36,4 +36,9 @@ public class AreaServiceImpl implements  AreaService{
     public List<Area> getAreas() {
         return areaRepository.findAll();
     }
+
+    @Override
+    public Area getAreaByApiId(Long apiId) {
+        return areaRepository.findByApiId(apiId);
+    }
 }

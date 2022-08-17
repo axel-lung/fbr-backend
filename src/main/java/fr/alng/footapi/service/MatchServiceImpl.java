@@ -4,6 +4,7 @@
 
 package fr.alng.footapi.service;
 
+import fr.alng.footapi.model.Area;
 import fr.alng.footapi.model.Match;
 import fr.alng.footapi.repository.MatchRepository;
 
@@ -27,5 +28,10 @@ public class MatchServiceImpl implements MatchService{
     @Override
     public List<Match> getMatches() {
         return matchRepository.findAll();
+    }
+
+    @Override
+    public Match getMatchByApiId(Long apiId) {
+        return matchRepository.findByApiId(apiId);
     }
 }

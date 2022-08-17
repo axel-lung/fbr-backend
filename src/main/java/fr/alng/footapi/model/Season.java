@@ -22,6 +22,8 @@ public class Season {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private Long apiId;
+
     @Column(name = "start_date")
     private Date startDate;
 

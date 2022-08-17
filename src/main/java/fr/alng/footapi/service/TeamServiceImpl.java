@@ -5,6 +5,7 @@
 package fr.alng.footapi.service;
 
 
+import fr.alng.footapi.model.Area;
 import fr.alng.footapi.model.Team;
 import fr.alng.footapi.repository.TeamRepository;
 
@@ -28,5 +29,10 @@ public class TeamServiceImpl implements TeamService{
     @Override
     public List<Team> geTeams() {
         return teamRepository.findAll();
+    }
+
+    @Override
+    public Team getTeamByApiId(Long apiId) {
+        return teamRepository.findByApiId(apiId);
     }
 }

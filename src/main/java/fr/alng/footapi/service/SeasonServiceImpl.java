@@ -4,6 +4,7 @@
 
 package fr.alng.footapi.service;
 
+import fr.alng.footapi.model.Area;
 import fr.alng.footapi.model.Season;
 import fr.alng.footapi.repository.SeasonRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,5 +36,10 @@ public class SeasonServiceImpl implements SeasonService{
     @Override
     public List<Season> getSeasons() {
         return seasonRepository.findAll();
+    }
+
+    @Override
+    public Season getSeasonByApiId(Long apiId) {
+        return seasonRepository.findByApiId(apiId);
     }
 }

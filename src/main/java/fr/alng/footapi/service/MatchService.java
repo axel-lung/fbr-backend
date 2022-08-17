@@ -4,6 +4,7 @@
 
 package fr.alng.footapi.service;
 
+import fr.alng.footapi.model.Area;
 import fr.alng.footapi.model.Match;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface MatchService {
     Match saveMatch(Match match);
     Optional<Match> getMatch(Long id);
     List<Match> getMatches();
+    Match getMatchByApiId(Long apiId);
+
 }

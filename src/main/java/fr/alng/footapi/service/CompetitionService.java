@@ -4,6 +4,7 @@
 
 package fr.alng.footapi.service;
 
+import fr.alng.footapi.model.Area;
 import fr.alng.footapi.model.Competition;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface CompetitionService {
     Competition saveCompetition(Competition competition);
     Optional<Competition> getCompetition(Long id);
     List<Competition> getCompetitions();
+    Competition getCompetitionByApiId(Long apiId);
+
 }

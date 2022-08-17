@@ -22,6 +22,8 @@ public class Competition {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private Long apiId;
+
     private String name;
 
     private String code;

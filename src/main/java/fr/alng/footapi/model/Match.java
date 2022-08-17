@@ -21,6 +21,7 @@ public class Match {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private Long apiId;
     @Column(name = "date_utc")
     private Date utcDate;
     private String status;
