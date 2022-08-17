@@ -64,10 +64,4 @@ public class Match {
         inverseJoinColumns = @JoinColumn(name = "room_id"))
     Set<Room> rooms;
 
-    /*@ManyToMany
-    @JoinTable(
-            name = "team_match",
-            joinColumns = @JoinColumn(name = "match_id"),
-            inverseJoinColumns = @JoinColumn(name = "team_id"))
-    Set<Team> teams;*/
 }
