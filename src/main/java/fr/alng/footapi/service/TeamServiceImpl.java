@@ -5,7 +5,6 @@
 package fr.alng.footapi.service;
 
 
-import fr.alng.footapi.model.Area;
 import fr.alng.footapi.model.Team;
 import fr.alng.footapi.repository.TeamRepository;
 

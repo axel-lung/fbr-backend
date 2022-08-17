@@ -4,7 +4,6 @@
 
 package fr.alng.footapi.service;
 
-import fr.alng.footapi.model.Area;
 import fr.alng.footapi.model.Competition;
 import fr.alng.footapi.repository.CompetitionRepository;
 import lombok.RequiredArgsConstructor;
