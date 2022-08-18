@@ -4,11 +4,8 @@
 
 package fr.alng.footapi.dto;
 
-import fr.alng.footapi.model.Match;
-import fr.alng.footapi.model.User;
 import lombok.Data;
 
-import javax.persistence.Column;
 import java.util.Date;
 import java.util.List;
 

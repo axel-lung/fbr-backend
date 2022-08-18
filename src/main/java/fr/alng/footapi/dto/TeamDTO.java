@@ -4,11 +4,7 @@
 
 package fr.alng.footapi.dto;
 
-import fr.alng.footapi.model.Match;
 import lombok.Data;
-
-import javax.persistence.OneToMany;
-import java.util.Set;
 
 @Data
 public class TeamDTO {

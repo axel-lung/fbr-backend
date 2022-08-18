@@ -4,7 +4,6 @@
 
 package fr.alng.footapi.dto;
 
-import fr.alng.footapi.model.Match;
 import lombok.Data;
 
 @Data

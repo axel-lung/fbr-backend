@@ -4,13 +4,13 @@
 
 package fr.alng.footapi.dto;
 
-import fr.alng.footapi.model.Bet;
 import fr.alng.footapi.model.Role;
-import fr.alng.footapi.model.Room;
 import lombok.Data;
 
-import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 @Data
 public class UserDTO {

@@ -4,11 +4,8 @@
 
 package fr.alng.footapi.dto;
 
-import fr.alng.footapi.model.Bet;
-import fr.alng.footapi.model.Room;
 import lombok.Data;
 
-import javax.persistence.Column;
 import java.util.Date;
 import java.util.List;
 
