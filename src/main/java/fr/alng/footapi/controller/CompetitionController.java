@@ -4,6 +4,7 @@
 
 package fr.alng.footapi.controller;
 
+import fr.alng.footapi.dto.CompetitionDTO;
 import fr.alng.footapi.model.Competition;
 import fr.alng.footapi.service.CompetitionService;
 import lombok.RequiredArgsConstructor;
@@ -32,8 +33,8 @@ public class CompetitionController {
     }
 
     @PostMapping("/competition/save")
-    public ResponseEntity<Competition>saveCompetition(@RequestBody Competition competition){
+    public ResponseEntity<CompetitionDTO>saveCompetition(@RequestBody CompetitionDTO competitionDTO){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/competition/save").toUriString());
-        return ResponseEntity.created(uri).body(competitionService.saveCompetition(competition));
+        return ResponseEntity.created(uri).body(competitionService.saveCompetition(competitionDTO));
     }
 }

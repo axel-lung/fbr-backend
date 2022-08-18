@@ -4,6 +4,8 @@
 
 package fr.alng.footapi.service;
 
+import fr.alng.footapi.converter.ModelConverter;
+import fr.alng.footapi.dto.SeasonDTO;
 import fr.alng.footapi.model.Season;
 import fr.alng.footapi.repository.SeasonRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,10 +23,13 @@ import java.util.Optional;
 public class SeasonServiceImpl implements SeasonService{
 
     private final SeasonRepository seasonRepository;
+    private final ModelConverter<Season, SeasonDTO> modelConverter = new ModelConverter<>();
 
     @Override
-    public Season saveSeason(Season season) {
-        return seasonRepository.save(season);
+    public SeasonDTO saveSeason(SeasonDTO seasonDTO) {
+        Season season = modelConverter.convertDtoToEntity(seasonDTO, Season.class);
+        season = seasonRepository.save(season);
+        return modelConverter.convertEntityToDto(season, SeasonDTO.class);
     }
 
     @Override

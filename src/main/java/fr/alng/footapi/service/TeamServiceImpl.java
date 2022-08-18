@@ -5,6 +5,8 @@
 package fr.alng.footapi.service;
 
 
+import fr.alng.footapi.converter.ModelConverter;
+import fr.alng.footapi.dto.TeamDTO;
 import fr.alng.footapi.model.Team;
 import fr.alng.footapi.repository.TeamRepository;
 
@@ -14,10 +16,13 @@ import java.util.Optional;
 public class TeamServiceImpl implements TeamService{
 
     private TeamRepository teamRepository;
+    private final ModelConverter<Team, TeamDTO> modelConverter = new ModelConverter<>();
 
     @Override
-    public Team saveTeam(Team team) {
-        return teamRepository.save(team);
+    public TeamDTO saveTeam(TeamDTO teamDTO) {
+        Team team = modelConverter.convertDtoToEntity(teamDTO, Team.class);
+        team = teamRepository.save(team);
+        return modelConverter.convertEntityToDto(team, TeamDTO.class);
     }
 
     @Override

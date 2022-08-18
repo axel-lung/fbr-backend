@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: fr.alng.footapi.FootApiApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.743 s - in fr.alng.footapi.FootApiApplicationTests

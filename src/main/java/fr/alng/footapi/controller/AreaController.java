@@ -4,6 +4,7 @@
 
 package fr.alng.footapi.controller;
 
+import fr.alng.footapi.dto.AreaDTO;
 import fr.alng.footapi.model.Area;
 import fr.alng.footapi.service.AreaService;
 import lombok.RequiredArgsConstructor;
@@ -32,8 +33,8 @@ public class AreaController {
     }
 
     @PostMapping("/area/save")
-    public ResponseEntity<Area>saveArea(@RequestBody Area area){
+    public ResponseEntity<AreaDTO> saveArea(@RequestBody AreaDTO areaDTO){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/area/save").toUriString());
-        return ResponseEntity.created(uri).body(areaService.saveArea(area));
+        return ResponseEntity.created(uri).body(areaService.saveArea(areaDTO));
     }
 }

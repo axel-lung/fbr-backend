@@ -4,6 +4,8 @@
 
 package fr.alng.footapi.service;
 
+import fr.alng.footapi.converter.ModelConverter;
+import fr.alng.footapi.dto.AreaDTO;
 import fr.alng.footapi.model.Area;
 import fr.alng.footapi.repository.AreaRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,10 +23,13 @@ import java.util.Optional;
 public class AreaServiceImpl implements  AreaService{
 
     private final AreaRepository areaRepository;
+    private final ModelConverter<Area, AreaDTO> modelConverter = new ModelConverter<>();
 
     @Override
-    public Area saveArea(Area area) {
-        return areaRepository.save(area);
+    public AreaDTO saveArea(AreaDTO areaDTO) {
+        Area area = modelConverter.convertDtoToEntity(areaDTO, Area.class);
+        area = areaRepository.save(area);
+        return modelConverter.convertEntityToDto(area, AreaDTO.class);
     }
 
     @Override

@@ -4,6 +4,7 @@
 
 package fr.alng.footapi.controller;
 
+import fr.alng.footapi.dto.TeamDTO;
 import fr.alng.footapi.model.Team;
 import fr.alng.footapi.service.TeamService;
 import lombok.RequiredArgsConstructor;
@@ -32,9 +33,9 @@ public class TeamController {
     }
 
     @PostMapping("/team/save")
-    public ResponseEntity<Team>saveCompetition(@RequestBody Team team){
+    public ResponseEntity<TeamDTO>saveCompetition(@RequestBody TeamDTO teamDTO){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/team/save").toUriString());
-        return ResponseEntity.created(uri).body(teamService.saveTeam(team));
+        return ResponseEntity.created(uri).body(teamService.saveTeam(teamDTO));
     }
 
 }

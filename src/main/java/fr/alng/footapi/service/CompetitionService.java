@@ -4,6 +4,7 @@
 
 package fr.alng.footapi.service;
 
+import fr.alng.footapi.dto.CompetitionDTO;
 import fr.alng.footapi.model.Competition;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.Optional;
 
 public interface CompetitionService {
 
-    Competition saveCompetition(Competition competition);
+    CompetitionDTO saveCompetition(CompetitionDTO competitionDTO);
     Optional<Competition> getCompetition(Long id);
     List<Competition> getCompetitions();
     Competition getCompetitionByApiId(Long apiId);

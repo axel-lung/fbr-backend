@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.alng.footapi.dto.UserDTO;
 import fr.alng.footapi.exception.ApiRequestException;
 import fr.alng.footapi.model.Role;
 import fr.alng.footapi.model.User;
@@ -44,12 +45,12 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:8100")
     @PostMapping("/user/save")
-    public ResponseEntity<User>saveUser(@RequestBody User user){
+    public ResponseEntity<UserDTO>saveUser(@RequestBody UserDTO userDTO){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
-        if(userService.getUser(user.getUsername()) != null) {
+        if(userService.getUser(userDTO.getUsername()) != null) {
             throw new ApiRequestException("Username already exist. Choose another one.");
         }
-        return ResponseEntity.created(uri).body(userService.saveUser(user));
+        return ResponseEntity.created(uri).body(userService.saveUser(userDTO));
     }
 
     @CrossOrigin(origins = "http://localhost:8100")

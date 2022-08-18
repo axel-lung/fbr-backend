@@ -4,6 +4,8 @@
 
 package fr.alng.footapi.service;
 
+import fr.alng.footapi.converter.ModelConverter;
+import fr.alng.footapi.dto.CompetitionDTO;
 import fr.alng.footapi.model.Competition;
 import fr.alng.footapi.repository.CompetitionRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +22,13 @@ import java.util.Optional;
 @Slf4j
 public class CompetitionServiceImpl implements CompetitionService {
     private final CompetitionRepository competitionRepository;
+    private final ModelConverter<Competition, CompetitionDTO> modelConverter = new ModelConverter<>();
 
     @Override
-    public Competition saveCompetition(Competition competition){
-        return competitionRepository.save(competition);
+    public CompetitionDTO saveCompetition(CompetitionDTO competitionDTO){
+        Competition competition = modelConverter.convertDtoToEntity(competitionDTO, Competition.class);
+        competition = competitionRepository.save(competition);
+        return modelConverter.convertEntityToDto(competition, CompetitionDTO.class);
     }
 
     @Override

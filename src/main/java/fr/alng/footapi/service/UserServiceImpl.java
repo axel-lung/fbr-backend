@@ -1,12 +1,13 @@
 package fr.alng.footapi.service;
 
+import fr.alng.footapi.converter.ModelConverter;
+import fr.alng.footapi.dto.UserDTO;
 import fr.alng.footapi.model.Role;
 import fr.alng.footapi.model.User;
 import fr.alng.footapi.repository.RoleRepository;
 import fr.alng.footapi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ModelConverter<User, UserDTO> modelConverter = new ModelConverter<>();
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -43,10 +45,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User saveUser(User user) {
+    public UserDTO saveUser(UserDTO userDTO) {
         log.info("saving the new user");
+        User user = modelConverter.convertDtoToEntity(userDTO, User.class);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        user = userRepository.save(user);
+        return modelConverter.convertEntityToDto(user, UserDTO.class);
     }
 
     @Override

@@ -4,6 +4,7 @@
 
 package fr.alng.footapi.controller;
 
+import fr.alng.footapi.dto.BetDTO;
 import fr.alng.footapi.model.Bet;
 import fr.alng.footapi.service.BetService;
 import lombok.RequiredArgsConstructor;
@@ -33,9 +34,9 @@ public class BetController {
     }
 
     @PostMapping("/bet/save")
-    public ResponseEntity<Bet>saveBet(@RequestBody Bet bet){
+    public ResponseEntity<BetDTO>saveBet(@RequestBody BetDTO betDTO){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/bet/save").toUriString());
-        return ResponseEntity.created(uri).body(betService.saveBet(bet));
+        return ResponseEntity.created(uri).body(betService.saveBet(betDTO));
     }
 
 }

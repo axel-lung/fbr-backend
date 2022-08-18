@@ -4,13 +4,14 @@
 
 package fr.alng.footapi.service;
 
+import fr.alng.footapi.dto.BetDTO;
 import fr.alng.footapi.model.Bet;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface BetService {
-    Bet saveBet(Bet bet);
+    BetDTO saveBet(BetDTO betDTO);
     Optional<Bet> getBet(Long id);
     List<Bet> getBets();
 }

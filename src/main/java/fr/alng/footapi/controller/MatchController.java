@@ -4,6 +4,7 @@
 
 package fr.alng.footapi.controller;
 
+import fr.alng.footapi.dto.MatchDTO;
 import fr.alng.footapi.model.Match;
 import fr.alng.footapi.service.MatchService;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +34,8 @@ public class MatchController {
     }
 
     @PostMapping("/match/save")
-    public ResponseEntity<Match>saveCompetition(@RequestBody Match match){
+    public ResponseEntity<MatchDTO>saveCompetition(@RequestBody MatchDTO matchDTO){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/match/save").toUriString());
-        return ResponseEntity.created(uri).body(matchService.saveMatch(match));
+        return ResponseEntity.created(uri).body(matchService.saveMatch(matchDTO));
     }
 }

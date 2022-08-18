@@ -4,13 +4,14 @@
 
 package fr.alng.footapi.service;
 
+import fr.alng.footapi.dto.RoomDTO;
 import fr.alng.footapi.model.Room;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface RoomService {
-    Room saveRoom(Room room);
+    RoomDTO saveRoom(RoomDTO roomDTO);
     Optional<Room> getRoom(Long id);
     List<Room> getRooms();
 }

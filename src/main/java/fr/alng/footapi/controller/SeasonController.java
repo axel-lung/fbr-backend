@@ -4,6 +4,7 @@
 
 package fr.alng.footapi.controller;
 
+import fr.alng.footapi.dto.SeasonDTO;
 import fr.alng.footapi.model.Season;
 import fr.alng.footapi.service.SeasonService;
 import lombok.RequiredArgsConstructor;
@@ -32,8 +33,8 @@ public class SeasonController {
     }
 
     @PostMapping("/season/save")
-    public ResponseEntity<Season>saveSeason(@RequestBody Season season){
+    public ResponseEntity<SeasonDTO>saveSeason(@RequestBody SeasonDTO seasonDTO){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/season/save").toUriString());
-        return ResponseEntity.created(uri).body(seasonService.saveSeason(season));
+        return ResponseEntity.created(uri).body(seasonService.saveSeason(seasonDTO));
     }
 }

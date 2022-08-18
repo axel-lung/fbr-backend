@@ -4,6 +4,8 @@
 
 package fr.alng.footapi.service;
 
+import fr.alng.footapi.converter.ModelConverter;
+import fr.alng.footapi.dto.MatchDTO;
 import fr.alng.footapi.model.Match;
 import fr.alng.footapi.repository.MatchRepository;
 
@@ -13,10 +15,13 @@ import java.util.Optional;
 public class MatchServiceImpl implements MatchService{
 
     private MatchRepository matchRepository;
+    private final ModelConverter<Match, MatchDTO> modelConverter = new ModelConverter<>();
 
     @Override
-    public Match saveMatch(Match match) {
-        return matchRepository.save(match);
+    public MatchDTO saveMatch(MatchDTO matchDTO) {
+        Match match = modelConverter.convertDtoToEntity(matchDTO, Match.class);
+        match = matchRepository.save(match);
+        return modelConverter.convertEntityToDto(match, MatchDTO.class);
     }
 
     @Override

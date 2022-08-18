@@ -5,6 +5,8 @@
 package fr.alng.footapi.service;
 
 
+import fr.alng.footapi.converter.ModelConverter;
+import fr.alng.footapi.dto.RoomDTO;
 import fr.alng.footapi.model.Room;
 import fr.alng.footapi.repository.RoomRepository;
 
@@ -14,10 +16,13 @@ import java.util.Optional;
 public class RoomServiceImpl implements RoomService{
 
     private RoomRepository roomRepository;
+    private final ModelConverter<Room, RoomDTO> modelConverter = new ModelConverter<>();
 
     @Override
-    public Room saveRoom(Room room) {
-        return roomRepository.save(room);
+    public RoomDTO saveRoom(RoomDTO roomDTO) {
+        Room room = modelConverter.convertDtoToEntity(roomDTO, Room.class);
+        room = roomRepository.save(room);
+        return modelConverter.convertEntityToDto(room, RoomDTO.class);
     }
 
     @Override

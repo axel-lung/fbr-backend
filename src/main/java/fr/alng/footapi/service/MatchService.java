@@ -4,13 +4,14 @@
 
 package fr.alng.footapi.service;
 
+import fr.alng.footapi.dto.MatchDTO;
 import fr.alng.footapi.model.Match;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface MatchService {
-    Match saveMatch(Match match);
+    MatchDTO saveMatch(MatchDTO matchDTO);
     Optional<Match> getMatch(Long id);
     List<Match> getMatches();
     Match getMatchByApiId(Long apiId);

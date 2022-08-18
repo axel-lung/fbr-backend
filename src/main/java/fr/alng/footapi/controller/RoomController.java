@@ -4,6 +4,7 @@
 
 package fr.alng.footapi.controller;
 
+import fr.alng.footapi.dto.RoomDTO;
 import fr.alng.footapi.model.Room;
 import fr.alng.footapi.service.RoomService;
 import lombok.RequiredArgsConstructor;
@@ -32,8 +33,8 @@ public class RoomController {
     }
 
     @PostMapping("/room/save")
-    public ResponseEntity<Room>saveCompetition(@RequestBody Room room){
+    public ResponseEntity<RoomDTO>saveCompetition(@RequestBody RoomDTO roomDTO){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/room/save").toUriString());
-        return ResponseEntity.created(uri).body(roomService.saveRoom(room));
+        return ResponseEntity.created(uri).body(roomService.saveRoom(roomDTO));
     }
 }
