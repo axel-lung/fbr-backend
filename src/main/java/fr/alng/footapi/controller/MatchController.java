@@ -21,7 +21,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MatchController {
 
-    private MatchService matchService;
+    private final MatchService matchService;
 
     @GetMapping("/matches")
     public ResponseEntity<List<Match>> getMatches(){

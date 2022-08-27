@@ -9,8 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "matche")
@@ -62,6 +61,6 @@ public class Match {
         name = "room_match",
         joinColumns = @JoinColumn(name = "match_id"),
         inverseJoinColumns = @JoinColumn(name = "room_id"))
-    Set<Room> rooms;
+    Collection<Room> rooms = new ArrayList<>();
 
 }

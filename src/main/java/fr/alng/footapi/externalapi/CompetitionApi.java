@@ -13,4 +13,5 @@ public class CompetitionApi {
     private String code;
     private String type;
     private String emblem;
+    private AreaApi area;
 }

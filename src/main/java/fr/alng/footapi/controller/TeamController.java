@@ -20,7 +20,7 @@ import java.util.Optional;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class TeamController {
-    private TeamService teamService;
+    private final TeamService teamService;
 
     @GetMapping("/teams")
     public ResponseEntity<List<Team>> getTeams(){

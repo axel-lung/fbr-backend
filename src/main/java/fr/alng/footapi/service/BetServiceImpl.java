@@ -8,12 +8,19 @@ import fr.alng.footapi.converter.ModelConverter;
 import fr.alng.footapi.dto.BetDTO;
 import fr.alng.footapi.model.Bet;
 import fr.alng.footapi.repository.BetRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
+@RequiredArgsConstructor
+@Transactional
+@Slf4j
 public class BetServiceImpl implements BetService{
-    private BetRepository betRepository;
+    private final BetRepository betRepository;
     private final ModelConverter<Bet, BetDTO> modelConverter = new ModelConverter<>();
 
     @Override

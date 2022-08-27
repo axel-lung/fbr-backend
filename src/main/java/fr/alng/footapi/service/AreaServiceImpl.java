@@ -6,6 +6,7 @@ package fr.alng.footapi.service;
 
 import fr.alng.footapi.converter.ModelConverter;
 import fr.alng.footapi.dto.AreaDTO;
+import fr.alng.footapi.externalapi.AreaApi;
 import fr.alng.footapi.model.Area;
 import fr.alng.footapi.repository.AreaRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
-public class AreaServiceImpl implements  AreaService{
+public class AreaServiceImpl implements AreaService{
 
     private final AreaRepository areaRepository;
     private final ModelConverter<Area, AreaDTO> modelConverter = new ModelConverter<>();
@@ -45,5 +46,14 @@ public class AreaServiceImpl implements  AreaService{
     @Override
     public Area getAreaByApiId(Long apiId) {
         return areaRepository.findByApiId(apiId);
+    }
+
+    @Override
+    public void updateArea(Long apiId, AreaApi newArea) {
+        Area area = areaRepository.findByApiId(apiId);
+        area.setName(newArea.getName());
+        area.setCountryCode(newArea.getCode());
+        area.setFlag(newArea.getFlag());
+        areaRepository.save(area);
     }
 }

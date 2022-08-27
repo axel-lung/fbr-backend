@@ -12,8 +12,4 @@ public class ScoreApi {
     private String duration;
     private FullTime fullTime;
 }
-@Getter
-class FullTime{
-    private int home;
-    private int away;
-}
+

@@ -7,7 +7,6 @@ package fr.alng.footapi.dto;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 public class MatchDTO {
@@ -20,6 +19,10 @@ public class MatchDTO {
     private int homeScore;
     private int awayScore;
     private String groupe;
-    private BetDTO bet;
-    private List<RoomDTO> rooms;
+    private AreaDTO area;
+    private CompetitionDTO competition;
+    private SeasonDTO season;
+    private TeamDTO homeTeam;
+    private TeamDTO awayTeam;
+    private TeamDTO winnerTeam;
 }

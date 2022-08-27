@@ -9,8 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "room")
@@ -32,9 +31,16 @@ public class Room {
     @Column(name = "is_cash_price")
     private boolean isCashPrice;
 
-    @ManyToMany(mappedBy = "rooms")
-    Set<Match> matches;
+    @ManyToMany
+    @JoinTable( name = "room_match",
+            joinColumns = @JoinColumn( name = "room_id" ),
+            inverseJoinColumns = @JoinColumn( name = "match_id" ) )
+    private Collection<Match> matches = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "userRooms")
-    Set<User> users;
+    @ManyToMany
+    @JoinTable(
+            name = "user_room",
+            joinColumns = @JoinColumn(name = "room_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    Collection<User> users = new ArrayList<>();
 }

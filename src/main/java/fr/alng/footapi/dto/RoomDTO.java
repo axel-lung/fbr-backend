@@ -11,6 +11,7 @@ import java.util.List;
 
 @Data
 public class RoomDTO {
+    private Long id;
     private String name;
     private int playerLimit;
     private Date dateFrom;

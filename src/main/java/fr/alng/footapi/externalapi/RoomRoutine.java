@@ -6,66 +6,65 @@ package fr.alng.footapi.externalapi;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.json.JsonReadFeature;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.mysql.cj.xdevapi.JsonArray;
+import fr.alng.footapi.converter.ModelConverter;
+import fr.alng.footapi.dto.RoomDTO;
+import fr.alng.footapi.model.Match;
 import fr.alng.footapi.model.Room;
+import fr.alng.footapi.repository.MatchRepository;
+import fr.alng.footapi.repository.RoomRepository;
 import fr.alng.footapi.service.RoomService;
-import lombok.Getter;
-import org.apache.tomcat.util.json.JSONParser;
-import org.apache.tomcat.util.json.ParseException;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-
+@Component
+@Slf4j
 public class RoomRoutine {
-    RestTemplate restTemplate = new RestTemplate();
-    HttpHeaders headers = new HttpHeaders();
+
+    private final ModelConverter<Room, RoomDTO> modelConverterRoom = new ModelConverter<>();
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public void run(RoomService roomService) throws JsonProcessingException {
-        headers.set("X-Auth-Token", "129f8612ad83483b83282f62998e4509");
-        HttpEntity<String> request = new HttpEntity<>(headers);
-        ResponseEntity<MatchApiDTO> matchApiDTO = restTemplate.exchange(
-                "https://api.football-data.org/v4/matches?status=SCHEDULED&date=2022-08-16",
-                HttpMethod.GET,
-                request,
-                MatchApiDTO.class
+    public void run(RoomRepository roomRepository, MatchRepository matchRepository, RoomService roomService) throws JsonProcessingException {
+
+        LocalDate dateFrom = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().plusDays(1);
+        LocalDate dateTo = dateFrom.plusDays(8);
+
+        List<Match> matchList = matchRepository.findMatchesBetweenDates(
+                Date.from(dateFrom.atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                Date.from(dateTo.atStartOfDay(ZoneId.systemDefault()).toInstant())
         );
 
-        Objects.requireNonNull(matchApiDTO.getBody()).getMatches().forEach((MatchApi matchApi) -> {
-            System.out.println(matchApi.getId());
-        });
+        RoomDTO roomDTO = new RoomDTO();
+        roomDTO.setBalance(0);
+        roomDTO.setCashPrice(false);
+        roomDTO.setDateFrom(Date.from(dateFrom.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        roomDTO.setDateTo(Date.from(dateTo.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        roomDTO.setName("Room" + dateFrom.getDayOfYear());
+        roomDTO.setPlayerLimit(50);
+        Room room = modelConverterRoom.convertDtoToEntity(roomDTO, Room.class);
+        roomRepository.save(room);
 
+        for (LocalDate date = dateFrom; date.isBefore(dateTo); date = date.plusDays(1)) {
+            System.out.println(date);
+            List<Match> tempMatchApiList = new ArrayList<>();
+            LocalDate finalDate = date;
+            matchList.forEach((Match match) -> {
+                LocalDate utcDate = match.getUtcDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                if (utcDate.equals(finalDate)) tempMatchApiList.add(match);
+            });
+            int listSize = tempMatchApiList.size();
+            if(listSize > 0) {
+                Match matchChosed = tempMatchApiList.get(((int) (Math.random() * listSize)));
+                roomService.addMatchToRoom(matchChosed.getApiId(), room.getId());
+            }else {
+                log.info("no matches on "+finalDate);
+            }
 
-
-        //System.out.println(Objects.requireNonNull(matchApiImpl.getBody()).getFilters().getStatus());
-
-
-        //roomService.saveRoom(new Room());
-    }
-
-
-}
-@Getter
-class MatchApiDTO{
-    private Filter filters;
-    private ResultSet resultSet;
-    private final List<MatchApi> matches;
-
-    public MatchApiDTO() {
-        matches = new ArrayList<>();
+        }
     }
 }

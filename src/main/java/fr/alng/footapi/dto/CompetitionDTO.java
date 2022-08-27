@@ -18,7 +18,7 @@ public class CompetitionDTO {
 
     private String emblem;
 
-    private String plan;
+    private AreaDTO area;
 
-    private MatchDTO match;
+    private SeasonDTO seasons;
 }

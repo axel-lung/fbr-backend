@@ -20,7 +20,7 @@ import java.util.Optional;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class RoomController {
-    private RoomService roomService;
+    private final RoomService roomService;
 
     @GetMapping("/rooms")
     public ResponseEntity<List<Room>> getRooms(){
@@ -28,12 +28,12 @@ public class RoomController {
     }
 
     @GetMapping("/room/{id}")
-    public ResponseEntity<Optional<Room>> getCompetition(@PathVariable("id") Long id){
+    public ResponseEntity<Optional<Room>> getRoom(@PathVariable("id") Long id){
         return ResponseEntity.ok().body(roomService.getRoom(id));
     }
 
     @PostMapping("/room/save")
-    public ResponseEntity<RoomDTO>saveCompetition(@RequestBody RoomDTO roomDTO){
+    public ResponseEntity<RoomDTO>saveRoom(@RequestBody RoomDTO roomDTO){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/room/save").toUriString());
         return ResponseEntity.created(uri).body(roomService.saveRoom(roomDTO));
     }

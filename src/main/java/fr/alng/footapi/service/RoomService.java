@@ -14,4 +14,6 @@ public interface RoomService {
     RoomDTO saveRoom(RoomDTO roomDTO);
     Optional<Room> getRoom(Long id);
     List<Room> getRooms();
+
+    void addMatchToRoom(Long matchApiId, Long roomId);
 }

@@ -21,7 +21,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BetController {
 
-    private BetService betService;
+    private final BetService betService;
 
     @GetMapping("/bets")
     public ResponseEntity<List<Bet>> getBets(){

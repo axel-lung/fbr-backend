@@ -5,6 +5,7 @@
 package fr.alng.footapi.service;
 
 import fr.alng.footapi.dto.AreaDTO;
+import fr.alng.footapi.externalapi.AreaApi;
 import fr.alng.footapi.model.Area;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface AreaService {
     Optional<Area> getArea(Long id);
     List<Area> getAreas();
     Area getAreaByApiId(Long apiId);
+    void updateArea(Long apiId, AreaApi newArea);
 }

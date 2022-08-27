@@ -34,5 +34,5 @@ public class User {
             name = "user_room",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "room_id"))
-    Set<Room> userRooms;
+    Collection<Room> rooms = new ArrayList<>();
 }

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>fr.alng</groupId>
 	<artifactId>foot-api</artifactId>
-	<version>0.1</version>
+	<version>1.0</version>
 	<name>foot-api</name>
 	<description>Foot api Rest</description>
 	<properties>
