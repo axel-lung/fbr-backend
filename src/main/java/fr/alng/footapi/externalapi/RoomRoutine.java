@@ -5,7 +5,6 @@
 package fr.alng.footapi.externalapi;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.alng.footapi.converter.ModelConverter;
 import fr.alng.footapi.dto.RoomDTO;
 import fr.alng.footapi.model.Match;
@@ -30,7 +29,7 @@ public class RoomRoutine {
     private final ModelConverter<Room, RoomDTO> modelConverterRoom = new ModelConverter<>();
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public void run(RoomRepository roomRepository, MatchRepository matchRepository, RoomService roomService) throws JsonProcessingException {
+    public void run(RoomRepository roomRepository, MatchRepository matchRepository, RoomService roomService) {
 
         LocalDate dateFrom = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().plusDays(1);
         LocalDate dateTo = dateFrom.plusDays(8);
@@ -51,7 +50,6 @@ public class RoomRoutine {
         roomRepository.save(room);
 
         for (LocalDate date = dateFrom; date.isBefore(dateTo); date = date.plusDays(1)) {
-            System.out.println(date);
             List<Match> tempMatchApiList = new ArrayList<>();
             LocalDate finalDate = date;
             matchList.forEach((Match match) -> {
@@ -60,8 +58,8 @@ public class RoomRoutine {
             });
             int listSize = tempMatchApiList.size();
             if(listSize > 0) {
-                SecureRandom random = new SecureRandom(); // Compliant for security-sensitive use cases
-                Match matchChosed = tempMatchApiList.get(((int) (random.nextInt(listSize + 1))));
+                SecureRandom random = new SecureRandom();
+                Match matchChosed = tempMatchApiList.get((random.nextInt(listSize + 1)));
                 roomService.addMatchToRoom(matchChosed.getApiId(), room.getId());
             }else {
                 log.info("no matches on "+finalDate);

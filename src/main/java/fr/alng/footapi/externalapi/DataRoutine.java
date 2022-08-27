@@ -14,6 +14,7 @@ import fr.alng.footapi.service.AreaService;
 import fr.alng.footapi.service.CompetitionService;
 import fr.alng.footapi.service.MatchService;
 import fr.alng.footapi.service.TeamService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -24,6 +25,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Component
+@Slf4j
 public class DataRoutine {
 
     private BufferRepository bufferRepository;
@@ -102,6 +104,7 @@ public class DataRoutine {
                     }
                 }
                 default -> {
+                    log.error("Unknown element in buffer");
                 }
             }
         }else {
@@ -114,19 +117,19 @@ public class DataRoutine {
 
         List<Buffer> areaApis = bufferRepository.findByType("Area", false);
 
-        if(areaApis.size() > 0){
+        if(!areaApis.isEmpty()){
             return areaApis.get(0);
         }else {
             List<Buffer> competitionApis = bufferRepository.findByType("Competition", false);
-            if(competitionApis.size() > 0){
+            if(!competitionApis.isEmpty()){
                 return competitionApis.get(0);
             }else{
                 List<Buffer> teamApis = bufferRepository.findByType("Team", false);
-                if(teamApis.size() > 0){
+                if(!teamApis.isEmpty()){
                     return teamApis.get(0);
                 }else{
                     List<Buffer> matchApis = bufferRepository.findByType("Match", false);
-                    if(matchApis.size() > 0){
+                    if(!matchApis.isEmpty()){
                         return matchApis.get(0);
                     }
                 }
