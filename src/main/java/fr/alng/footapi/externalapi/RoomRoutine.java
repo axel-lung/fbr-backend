@@ -16,6 +16,7 @@ import fr.alng.footapi.service.RoomService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -59,7 +60,8 @@ public class RoomRoutine {
             });
             int listSize = tempMatchApiList.size();
             if(listSize > 0) {
-                Match matchChosed = tempMatchApiList.get(((int) (Math.random() * listSize)));
+                SecureRandom random = new SecureRandom(); // Compliant for security-sensitive use cases
+                Match matchChosed = tempMatchApiList.get(((int) (random.nextInt(listSize + 1))));
                 roomService.addMatchToRoom(matchChosed.getApiId(), room.getId());
             }else {
                 log.info("no matches on "+finalDate);
