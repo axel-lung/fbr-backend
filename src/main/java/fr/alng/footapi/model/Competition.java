@@ -4,6 +4,8 @@
 
 package fr.alng.footapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,13 +37,14 @@ public class Competition {
     private String plan;
 
     @ManyToOne
-    @JoinColumn(name = "area_id")
+    @JoinColumn(name = "area")
     private Area area;
 
     @ManyToOne
-    @JoinColumn(name = "season_id")
+    @JoinColumn(name = "season")
     private Season season;
 
     @OneToMany(mappedBy = "competition")
+        @JsonIgnore
     Set<Match> matches;
 }

@@ -4,6 +4,7 @@
 
 package fr.alng.footapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,15 +33,11 @@ public class Area {
     private String flag;
 
     @OneToMany(mappedBy = "area")
+    @JsonIgnore
     Set<Competition> competitions;
 
     @OneToMany(mappedBy = "area")
+    @JsonIgnore
     Set<Match> matches;
 
-    @OneToMany(mappedBy = "parentArea")
-    Set<Area> areas;
-
-    @ManyToOne
-    @JoinColumn(name = "parent_area_id")
-    private Area parentArea;
 }

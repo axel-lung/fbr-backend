@@ -1,5 +1,6 @@
 package fr.alng.footapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,7 +27,8 @@ public class User {
     private Date birthday;
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "betUser")
+    @JsonIgnore
     Set<Bet> bets;
 
     @ManyToMany

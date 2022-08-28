@@ -21,14 +21,14 @@ public class Bet {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "team")
-    private Team team;
+    @JoinColumn(name = "betTeam")
+    private Team betTeam;
 
     @ManyToOne
-    @JoinColumn(name = "matche")
-    private Match match;
+    @JoinColumn(name = "betMatche")
+    private Match betMatche;
 
     @ManyToOne
-    @JoinColumn(name = "user")
-    private User user;
+    @JoinColumn(name = "betUser")
+    private User betUser;
 }

@@ -4,6 +4,7 @@
 
 package fr.alng.footapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,12 +29,19 @@ public class Team {
     private String crest;
 
     @OneToMany(mappedBy = "homeTeam")
+    @JsonIgnore
     Set<Match> homeTeamMatches;
 
     @OneToMany(mappedBy = "awayTeam")
+    @JsonIgnore
     Set<Match> awayTeamMatches;
 
     @OneToMany(mappedBy = "winnerTeam")
+    @JsonIgnore
     Set<Match> winnerTeamMatches;
+
+    @OneToMany(mappedBy = "betTeam")
+    @JsonIgnore
+    Set<Bet> bets;
 
 }

@@ -4,6 +4,7 @@
 
 package fr.alng.footapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,36 +25,37 @@ public class Match {
     @Column(name = "date_utc")
     private Date utcDate;
     private String status;
-    private int matchday;
+    private Integer matchday;
     private String stage;
     private String duration;
     @Column(name = "home_score")
-    private int homeScore;
+    private Integer homeScore;
     @Column(name = "away_score")
-    private int awayScore;
+    private Integer awayScore;
     private String groupe;
 
     @ManyToOne
-    @JoinColumn(name = "area_id")
+    @JoinColumn(name = "area")
     private Area area;
 
     @ManyToOne
-    @JoinColumn(name = "competition_id")
+    @JoinColumn(name = "competition")
     private Competition competition;
 
     @ManyToOne
-    @JoinColumn(name = "home_team_id")
+    @JoinColumn(name = "homeTeam")
     private Team homeTeam;
 
     @ManyToOne
-    @JoinColumn(name = "away_team_id")
+    @JoinColumn(name = "awayTeam")
     private Team awayTeam;
 
     @ManyToOne
-    @JoinColumn(name = "winner_team_id")
+    @JoinColumn(name = "winnerTeam")
     private Team winnerTeam;
 
-    @OneToMany(mappedBy = "match")
+    @OneToMany(mappedBy = "betMatche")
+    @JsonIgnore
     Set<Bet> bets;
 
     @ManyToMany

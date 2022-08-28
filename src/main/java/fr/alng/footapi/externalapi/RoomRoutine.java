@@ -59,7 +59,7 @@ public class RoomRoutine {
             int listSize = tempMatchApiList.size();
             if(listSize > 0) {
                 SecureRandom random = new SecureRandom();
-                Match matchChosed = tempMatchApiList.get((random.nextInt(listSize + 1)));
+                Match matchChosed = tempMatchApiList.get((random.nextInt(listSize)));
                 roomService.addMatchToRoom(matchChosed.getApiId(), room.getId());
             }else {
                 log.info("no matches on "+finalDate);
