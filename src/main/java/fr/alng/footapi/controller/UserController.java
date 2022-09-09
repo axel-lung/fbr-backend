@@ -43,6 +43,12 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<User>getUserById(@PathVariable("id") Long id){
+        return ResponseEntity.ok().body(userService.getUserById(id));
+    }
+
+
     @CrossOrigin(origins = "http://localhost:8100")
     @PostMapping("/user/save")
     public ResponseEntity<UserDTO>saveUser(@RequestBody UserDTO userDTO){
@@ -81,6 +87,7 @@ public class UserController {
                 Map<String, String> tokens = new HashMap<>();
                 tokens.put("access_token", accessToken);
                 tokens.put("refresh_token", refreshToken);
+                tokens.put("id", user.getId().toString());
                 response.setContentType(APPLICATION_JSON_VALUE);
                 new ObjectMapper().writeValue(response.getOutputStream(), tokens);
             }catch (Exception exception){
@@ -95,6 +102,12 @@ public class UserController {
             throw new ApiRequestException("Refresh token is missing");
         }
     }
+
+    @GetMapping("/room/{roomid}/user/{userid}")
+    public ResponseEntity<Boolean> isUserInRoom(@PathVariable("roomid") Long roomid, @PathVariable("userid") Long userid, HttpServletResponse response){
+        return ResponseEntity.ok().body(userService.isUserInRoom(roomid, userid));
+    }
+
 }
 
 @Data

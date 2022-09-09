@@ -9,6 +9,7 @@ import fr.alng.footapi.filter.CustomAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -41,16 +42,42 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
         http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).disable();
-        /*http.csrf()
-                .ignoringAntMatchers("/api/**")
-                .and()
-                .authorizeRequests()
-                .antMatchers("/api/**").permitAll();*/
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/api/login/**", "/api/token/refresh/**", "/api/user/save/**", "/api/**").permitAll();
-        //http.authorizeRequests().antMatchers(GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
-        //http.authorizeRequests().antMatchers(POST, "/api/user/save/**").hasAnyAuthority("ROLE_ADMIN");
-        //http.authorizeRequests().anyRequest().authenticated();
+        http.authorizeRequests().antMatchers("/api/login/**", "/api/user/save/**", "/api/**").permitAll();
+        http.authorizeRequests()
+                .antMatchers(HttpMethod.GET,
+                        "/api/areas/**",
+                        "/api/area/**",
+                        "/api/bet/**",
+                        "/api/bets/**",
+                        "/api/competitions/**",
+                        "/api/competition/**",
+                        "/api/match/**",
+                        "/api/matches/**",
+                        "/api/room/**",
+                        "/api/rooms/**",
+                        "/api/season/**",
+                        "/api/seasons/**",
+                        "/api/team/**",
+                        "/api/teams/**",
+                        "/api/users/")
+                .hasAnyAuthority("ROLE_USER");
+        http.authorizeRequests()
+                .antMatchers(HttpMethod.POST,
+                        "/api/room/adduser",
+                        "/api/bet/**")
+                .hasAnyAuthority("ROLE_USER");
+        http.authorizeRequests()
+                .antMatchers(HttpMethod.POST,
+                        "/api/area/**",
+                        "/api/bet/**",
+                        "/api/competition/**",
+                        "/api/match/**",
+                        "/api/room/**",
+                        "/api/season/**",
+                        "/api/team/**",
+                        "/api/area/**")
+                .hasAnyAuthority("ROLE_ADMIN");
 
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

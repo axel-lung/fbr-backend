@@ -5,6 +5,7 @@
 package fr.alng.footapi.dto;
 
 import fr.alng.footapi.model.Match;
+import fr.alng.footapi.model.Room;
 import fr.alng.footapi.model.Team;
 import fr.alng.footapi.model.User;
 import lombok.Data;
@@ -12,6 +13,7 @@ import lombok.Data;
 @Data
 public class BetDTO {
     private Team team;
-    private Match match;
+    private Match matche;
     private User user;
+    private Room room;
 }

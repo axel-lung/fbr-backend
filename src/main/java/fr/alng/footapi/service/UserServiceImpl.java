@@ -3,8 +3,10 @@ package fr.alng.footapi.service;
 import fr.alng.footapi.converter.ModelConverter;
 import fr.alng.footapi.dto.UserDTO;
 import fr.alng.footapi.model.Role;
+import fr.alng.footapi.model.Room;
 import fr.alng.footapi.model.User;
 import fr.alng.footapi.repository.RoleRepository;
+import fr.alng.footapi.repository.RoomRepository;
 import fr.alng.footapi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,12 +21,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service @RequiredArgsConstructor @Transactional @Slf4j
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final RoomRepository roomRepository;
     private final PasswordEncoder passwordEncoder;
     private final ModelConverter<User, UserDTO> modelConverter = new ModelConverter<>();
 
@@ -73,5 +77,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public List<User> getUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public User getUserById(Long id) {
+        return userRepository.getReferenceById(id);
+    }
+
+    @Override
+    public Boolean isUserInRoom(Long roomId, Long userId) {
+        Room room = roomRepository.getReferenceById(roomId);
+        Optional<User> user = userRepository.findById(userId);
+        return user.filter(value -> room.getUsers().contains(value)).isPresent();
     }
 }

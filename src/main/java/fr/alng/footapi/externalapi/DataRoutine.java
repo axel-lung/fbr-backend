@@ -29,6 +29,7 @@ import java.util.List;
 public class DataRoutine {
 
     private BufferRepository bufferRepository;
+    final String TOKEN = "";
     public void run(BufferRepository bufferRepository, AreaService areaService,
                     CompetitionService competitionService, TeamService teamService,
                     MatchService matchService){
@@ -141,7 +142,7 @@ public class DataRoutine {
     public ResponseEntity<AreaApi> areaRequest(String url){
         final RestTemplate restTemplate = new RestTemplate();
         final HttpHeaders headers = new HttpHeaders();
-        headers.set("X-Auth-Token", "");
+        headers.set("X-Auth-Token", TOKEN);
         HttpEntity<String> request = new HttpEntity<>(headers);
         return restTemplate.exchange(
                 url,
@@ -154,7 +155,7 @@ public class DataRoutine {
     public ResponseEntity<CompetitionApi> competitionRequest(String url){
         final RestTemplate restTemplate = new RestTemplate();
         final HttpHeaders headers = new HttpHeaders();
-        headers.set("X-Auth-Token", "");
+        headers.set("X-Auth-Token", TOKEN);
         HttpEntity<String> request = new HttpEntity<>(headers);
         return restTemplate.exchange(
                 url,
@@ -167,7 +168,7 @@ public class DataRoutine {
     public ResponseEntity<TeamApi> teamRequest(String url){
         final RestTemplate restTemplate = new RestTemplate();
         final HttpHeaders headers = new HttpHeaders();
-        headers.set("X-Auth-Token", "");
+        headers.set("X-Auth-Token", TOKEN);
         HttpEntity<String> request = new HttpEntity<>(headers);
         return restTemplate.exchange(
                 url,
@@ -180,7 +181,7 @@ public class DataRoutine {
     public ResponseEntity<MatchApi> matchRequest(String url){
         final RestTemplate restTemplate = new RestTemplate();
         final HttpHeaders headers = new HttpHeaders();
-        headers.set("X-Auth-Token", "");
+        headers.set("X-Auth-Token", TOKEN);
         HttpEntity<String> request = new HttpEntity<>(headers);
         return restTemplate.exchange(
                 url,

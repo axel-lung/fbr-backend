@@ -24,6 +24,8 @@ import java.util.Objects;
 @Component
 public class FillBufferRoutine {
 
+    final String TOKEN = "";
+
     public void run(BufferRepository bufferRepository){
         ResponseEntity<MatchApiDTO> matchApiDTOResponseEntity = getMatchApis();
         Objects.requireNonNull(matchApiDTOResponseEntity.getBody()).getMatches().forEach((MatchBufferDTO match) -> {
@@ -78,9 +80,9 @@ public class FillBufferRoutine {
     public ResponseEntity<MatchApiDTO> getMatchApis(){
         final RestTemplate restTemplate = new RestTemplate();
         final HttpHeaders headers = new HttpHeaders();
-        headers.set("X-Auth-Token", "");
+        headers.set("X-Auth-Token", TOKEN);
         HttpEntity<String> request = new HttpEntity<>(headers);
-        LocalDate dateFrom = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate dateFrom = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().minusDays(1);
         LocalDate dateTo = dateFrom.plusDays(8);
         return restTemplate.exchange(
                 "https://api.football-data.org/v4/matches?dateFrom="+dateFrom+"&dateTo="+dateTo+"",

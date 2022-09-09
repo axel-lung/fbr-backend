@@ -4,6 +4,7 @@
 
 package fr.alng.footapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,9 +39,14 @@ public class Room {
     private Collection<Match> matches = new ArrayList<>();
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
             name = "user_room",
             joinColumns = @JoinColumn(name = "room_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     Collection<User> users = new ArrayList<>();
+
+    @OneToMany(mappedBy = "betRoom")
+    @JsonIgnore
+    Set<Bet> bets;
 }

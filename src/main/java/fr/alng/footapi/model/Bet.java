@@ -31,4 +31,8 @@ public class Bet {
     @ManyToOne
     @JoinColumn(name = "betUser")
     private User betUser;
+
+    @ManyToOne
+    @JoinColumn(name = "betRoom")
+    private Room betRoom;
 }

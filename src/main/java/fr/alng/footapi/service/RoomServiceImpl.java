@@ -9,8 +9,10 @@ import fr.alng.footapi.converter.ModelConverter;
 import fr.alng.footapi.dto.RoomDTO;
 import fr.alng.footapi.model.Match;
 import fr.alng.footapi.model.Room;
+import fr.alng.footapi.model.User;
 import fr.alng.footapi.repository.MatchRepository;
 import fr.alng.footapi.repository.RoomRepository;
+import fr.alng.footapi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,7 @@ public class RoomServiceImpl implements RoomService{
 
     private final RoomRepository roomRepository;
     private final MatchRepository matchRepository;
+    private final UserRepository userRepository;
     private final ModelConverter<Room, RoomDTO> modelConverter = new ModelConverter<>();
 
     @Override
@@ -55,5 +58,12 @@ public class RoomServiceImpl implements RoomService{
 
         boolean bool = room.getMatches().add(match);
         if(bool) log.info("true");
+    }
+
+    @Override
+    public void addUserToRoom(Long userId, Long roomId) {
+        User user = userRepository.getReferenceById(userId);
+        Room room = roomRepository.getReferenceById(roomId);
+        room.getUsers().add(user);
     }
 }

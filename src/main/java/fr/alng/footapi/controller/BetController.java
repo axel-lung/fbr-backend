@@ -39,4 +39,12 @@ public class BetController {
         return ResponseEntity.created(uri).body(betService.saveBet(betDTO));
     }
 
+    @GetMapping("/bet/user/{userid}/match/{matchid}/room/{roomid}")
+    public ResponseEntity<Bet> findBetByUserMatchRoom(@PathVariable("userid") Long userId,
+                                                      @PathVariable("matchid") Long matchId,
+                                                      @PathVariable("roomid") Long roomId
+    ){
+        return ResponseEntity.ok().body(betService.findBetByUserMatchRoom(userId, matchId, roomId));
+    }
+
 }

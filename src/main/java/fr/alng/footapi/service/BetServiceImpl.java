@@ -39,4 +39,11 @@ public class BetServiceImpl implements BetService{
     public List<Bet> getBets() {
         return betRepository.findAll();
     }
+
+    @Override
+    public Bet findBetByUserMatchRoom(Long userId, Long matchId, Long roomId) {
+        return betRepository.findBetByUserMatchRoom(userId, matchId, roomId);
+    }
+
+
 }

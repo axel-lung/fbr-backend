@@ -46,16 +46,16 @@ public class ScheduleConfig {
 
     FillBufferRoutine fillBufferRoutine = new FillBufferRoutine();
 
-    //@Scheduled(fixedDelay = 86400000)
+    @Scheduled(fixedDelay = 86400000)
     public void runRoomRoutine() throws JsonProcessingException {
         roomRoutine.run(roomRepository, matchRepository, roomService);
     }
-    //@Scheduled(fixedRate = 7000)
+    @Scheduled(fixedRate = 8000)
     public void runDataRoutine(){
         log.info("DataRoutine running...");
         dataRoutine.run(bufferRepository, areaService, competitionService, teamService, matchService);
     }
-    //@Scheduled(fixedRate = 3600000)
+    @Scheduled(fixedRate = 3600000)
     public void runFillBufferRoutine(){
         log.info("Fill Buffer running...");
         fillBufferRoutine.run(bufferRepository);

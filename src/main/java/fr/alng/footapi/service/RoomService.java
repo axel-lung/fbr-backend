@@ -16,4 +16,6 @@ public interface RoomService {
     List<Room> getRooms();
 
     void addMatchToRoom(Long matchApiId, Long roomId);
+
+    void addUserToRoom(Long roomId, Long userId);
 }

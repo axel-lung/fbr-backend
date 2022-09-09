@@ -59,6 +59,7 @@ public class Match {
     Set<Bet> bets;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
         name = "room_match",
         joinColumns = @JoinColumn(name = "match_id"),

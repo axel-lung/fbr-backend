@@ -22,14 +22,19 @@ public class User {
     private Long id;
     private String username;
     private String email;
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<Role> roles = new ArrayList<>();
     private Date birthday;
     private String password;
 
     @OneToMany(mappedBy = "betUser")
     @JsonIgnore
     Set<Bet> bets;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    Collection<Role> roles = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(

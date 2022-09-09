@@ -7,6 +7,7 @@ package fr.alng.footapi.controller;
 import fr.alng.footapi.dto.RoomDTO;
 import fr.alng.footapi.model.Room;
 import fr.alng.footapi.service.RoomService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,9 +33,21 @@ public class RoomController {
         return ResponseEntity.ok().body(roomService.getRoom(id));
     }
 
+    @PostMapping("/room/adduser")
+    public ResponseEntity<Room>addUserToRoom(@RequestBody UserToRoomForm form) {
+        roomService.addUserToRoom(form.getUserId(), form.getRoomId());
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping("/room/save")
     public ResponseEntity<RoomDTO>saveRoom(@RequestBody RoomDTO roomDTO){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/room/save").toUriString());
         return ResponseEntity.created(uri).body(roomService.saveRoom(roomDTO));
     }
+}
+
+@Data
+class UserToRoomForm{
+    Long userId;
+    Long roomId;
 }
