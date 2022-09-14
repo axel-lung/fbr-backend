@@ -29,12 +29,12 @@ public class MatchController {
     }
 
     @GetMapping("/match/{id}")
-    public ResponseEntity<Optional<Match>> getCompetition(@PathVariable("id") Long id){
+    public ResponseEntity<Optional<Match>> getMatch(@PathVariable("id") Long id){
         return ResponseEntity.ok().body(matchService.getMatch(id));
     }
 
     @PostMapping("/match/save")
-    public ResponseEntity<MatchDTO>saveCompetition(@RequestBody MatchDTO matchDTO){
+    public ResponseEntity<MatchDTO>saveMatch(@RequestBody MatchDTO matchDTO){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/match/save").toUriString());
         return ResponseEntity.created(uri).body(matchService.saveMatch(matchDTO));
     }

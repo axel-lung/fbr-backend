@@ -8,17 +8,12 @@ import lombok.Data;
 
 @Data
 public class CompetitionDTO {
+    private Long id;
     private Long apiId;
-
     private String name;
-
     private String code;
-
     private String type;
-
     private String emblem;
-
     private AreaDTO area;
-
     private SeasonDTO seasons;
 }

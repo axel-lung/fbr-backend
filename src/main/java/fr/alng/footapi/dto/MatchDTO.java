@@ -4,12 +4,15 @@
 
 package fr.alng.footapi.dto;
 
+import fr.alng.footapi.model.Room;
 import lombok.Data;
 
+import java.util.Collection;
 import java.util.Date;
 
 @Data
 public class MatchDTO {
+    private Long id;
     private Long apiId;
     private Date utcDate;
     private String status;
@@ -25,4 +28,5 @@ public class MatchDTO {
     private TeamDTO homeTeam;
     private TeamDTO awayTeam;
     private TeamDTO winnerTeam;
+    private Collection<Room> rooms;
 }

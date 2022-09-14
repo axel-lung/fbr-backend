@@ -25,7 +25,7 @@ public class User {
     private Date birthday;
     private String password;
 
-    @OneToMany(mappedBy = "betUser")
+    @OneToMany(mappedBy = "user")
     @JsonIgnore
     Set<Bet> bets;
 

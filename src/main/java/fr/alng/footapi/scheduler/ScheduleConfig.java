@@ -38,12 +38,13 @@ public class ScheduleConfig {
     private TeamService teamService;
     @Autowired
     private MatchService matchService;
-
+    @Autowired
+    private BetService betService;
     @Autowired
     private RoomService roomService;
     RoomRoutine roomRoutine = new RoomRoutine();
     DataRoutine dataRoutine = new DataRoutine();
-
+    VictoryRoutine victoryRoutine = new VictoryRoutine();
     FillBufferRoutine fillBufferRoutine = new FillBufferRoutine();
 
     @Scheduled(fixedDelay = 86400000)
@@ -59,5 +60,10 @@ public class ScheduleConfig {
     public void runFillBufferRoutine(){
         log.info("Fill Buffer running...");
         fillBufferRoutine.run(bufferRepository);
+    }
+    @Scheduled(fixedRate = 10000)
+    public void runVictoryRoutine(){
+        log.info("VictoryRoutine running...");
+        victoryRoutine.run(betService, matchService);
     }
 }

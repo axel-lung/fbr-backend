@@ -45,5 +45,10 @@ public class BetServiceImpl implements BetService{
         return betRepository.findBetByUserMatchRoom(userId, matchId, roomId);
     }
 
+    @Override
+    public List<Bet> findBetsWithoutResults() {
+        return betRepository.findBetsWithoutResults();
+    }
+
 
 }

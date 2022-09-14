@@ -10,6 +10,7 @@ import java.util.Date;
 
 @Data
 public class SeasonDTO {
+    private Long id;
     private Long apiId;
     private Date startDate;
     private Date endDate;

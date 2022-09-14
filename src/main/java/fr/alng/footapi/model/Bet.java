@@ -4,6 +4,7 @@
 
 package fr.alng.footapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,20 +20,22 @@ public class Bet {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private Boolean hasWin;
 
     @ManyToOne
-    @JoinColumn(name = "betTeam")
-    private Team betTeam;
+    @JoinColumn(name = "team")
+    private Team team;
 
     @ManyToOne
-    @JoinColumn(name = "betMatche")
-    private Match betMatche;
+    @JoinColumn(name = "matche")
+    private Match matche;
 
     @ManyToOne
-    @JoinColumn(name = "betUser")
-    private User betUser;
+    @JoinColumn(name = "user")
+    private User user;
 
     @ManyToOne
-    @JoinColumn(name = "betRoom")
-    private Room betRoom;
+    @JsonIgnore
+    @JoinColumn(name = "room")
+    private Room room;
 }

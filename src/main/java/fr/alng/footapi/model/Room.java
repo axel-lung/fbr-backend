@@ -46,7 +46,7 @@ public class Room {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     Collection<User> users = new ArrayList<>();
 
-    @OneToMany(mappedBy = "betRoom")
+    @OneToMany(mappedBy = "room")
     @JsonIgnore
     Set<Bet> bets;
 }

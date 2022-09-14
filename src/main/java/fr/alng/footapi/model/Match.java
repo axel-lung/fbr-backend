@@ -54,7 +54,7 @@ public class Match {
     @JoinColumn(name = "winnerTeam")
     private Team winnerTeam;
 
-    @OneToMany(mappedBy = "betMatche")
+    @OneToMany(mappedBy = "matche")
     @JsonIgnore
     Set<Bet> bets;
 

@@ -8,6 +8,7 @@ import lombok.Data;
 
 @Data
 public class TeamDTO {
+    private Long id;
     private Long apiId;
     private String name;
     private String shortName;

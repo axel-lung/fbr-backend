@@ -15,4 +15,6 @@ public interface BetService {
     Optional<Bet> getBet(Long id);
     List<Bet> getBets();
     Bet findBetByUserMatchRoom(Long userId, Long matchId, Long roomId);
+
+    List<Bet> findBetsWithoutResults();
 }

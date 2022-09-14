@@ -28,6 +28,10 @@ public class Team {
     private String tla;
     private String crest;
 
+    public Team(Long id) {
+        this.id = id;
+    }
+
     @OneToMany(mappedBy = "homeTeam")
     @JsonIgnore
     Set<Match> homeTeamMatches;
@@ -40,7 +44,7 @@ public class Team {
     @JsonIgnore
     Set<Match> winnerTeamMatches;
 
-    @OneToMany(mappedBy = "betTeam")
+    @OneToMany(mappedBy = "team")
     @JsonIgnore
     Set<Bet> bets;
 

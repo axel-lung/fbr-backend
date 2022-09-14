@@ -24,9 +24,11 @@ import java.util.Objects;
 @Component
 public class FillBufferRoutine {
 
-    final String TOKEN = "";
+    String TOKEN = "";
 
     public void run(BufferRepository bufferRepository){
+
+        TOKEN = "dkfnsk";
         ResponseEntity<MatchApiDTO> matchApiDTOResponseEntity = getMatchApis();
         Objects.requireNonNull(matchApiDTOResponseEntity.getBody()).getMatches().forEach((MatchBufferDTO match) -> {
             if(bufferRepository.findByApiId(match.getArea().getId()) == null){

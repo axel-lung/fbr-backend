@@ -12,6 +12,8 @@ import lombok.Data;
 
 @Data
 public class BetDTO {
+    private Long id;
+    private Boolean hasWin;
     private Team team;
     private Match matche;
     private User user;
