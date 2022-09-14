@@ -27,8 +27,8 @@ public class VictoryRoutine {
     private Long matchId;
 
     public void run(BetService betService, MatchService matchService){
-        List<Bet> BETS = betService.findBetsWithoutResults();
-        BETS.forEach((Bet bet) -> {
+        List<Bet> bets = betService.findBetsWithoutResults();
+        bets.forEach((Bet bet) -> {
             if(Objects.equals(matchService.getMatch(bet.getMatche().getId()).get().getStatus(), "FINISHED")){
                 matchId = bet.getMatche().getApiId();
                 setWinnerTeam(matchService);
