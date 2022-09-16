@@ -19,10 +19,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.cors.CorsConfiguration;
 
 
-@Configuration @EnableWebSecurity @RequiredArgsConstructor
+@Configuration @EnableWebSecurity @RequiredArgsConstructor @CrossOrigin
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
@@ -35,11 +36,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().ignoringAntMatchers("/api/login", "/api/user/save");
         CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
         customAuthenticationFilter.setFilterProcessesUrl("/api/login");
+
+        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
+        http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/api/login/**", "/api/user/save/**").permitAll();
+        http.authorizeRequests().antMatchers("/api/login", "/api/user/save").permitAll();
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET,
                         "/api/areas/**",
@@ -61,12 +64,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST,
                         "/api/room/adduser",
-                        "/api/bet/**")
+                        "/api/bet/save")
                 .hasAnyAuthority("ROLE_USER");
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST,
                         "/api/area/**",
-                        "/api/bet/**",
                         "/api/competition/**",
                         "/api/match/**",
                         "/api/room/**",
