@@ -58,7 +58,7 @@ public class Match {
     @JsonIgnore
     Set<Bet> bets;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JsonIgnore
     @JoinTable(
         name = "room_match",
