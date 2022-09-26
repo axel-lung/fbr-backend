@@ -7,6 +7,7 @@ package fr.alng.footapi.externalapi;
 import fr.alng.footapi.model.Buffer;
 import fr.alng.footapi.repository.BufferRepository;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -24,7 +25,11 @@ import java.util.Objects;
 @Component
 public class FillBufferRoutine {
 
-    String TOKEN = "";
+    String TOKEN;
+
+    FillBufferRoutine(@Value("${fbr.external.token}") String TOKEN){
+        this.TOKEN = TOKEN;
+    }
 
     public void run(BufferRepository bufferRepository){
         ResponseEntity<MatchApiDTO> matchApiDTOResponseEntity = getMatchApis();

@@ -15,6 +15,7 @@ import fr.alng.footapi.service.CompetitionService;
 import fr.alng.footapi.service.MatchService;
 import fr.alng.footapi.service.TeamService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -29,7 +30,12 @@ import java.util.List;
 public class DataRoutine {
 
     private BufferRepository bufferRepository;
-    final String TOKEN = "";
+    private final String TOKEN;
+
+    public DataRoutine(@Value("${fbr.external.token}") String TOKEN) {
+        this.TOKEN = TOKEN;
+    }
+
     public void run(BufferRepository bufferRepository, AreaService areaService,
                     CompetitionService competitionService, TeamService teamService,
                     MatchService matchService){

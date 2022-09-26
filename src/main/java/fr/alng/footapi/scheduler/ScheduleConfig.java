@@ -42,17 +42,21 @@ public class ScheduleConfig {
     private BetService betService;
     @Autowired
     private RoomService roomService;
-    RoomRoutine roomRoutine = new RoomRoutine();
-    DataRoutine dataRoutine = new DataRoutine();
-    VictoryRoutine victoryRoutine = new VictoryRoutine();
-    FillBufferRoutine fillBufferRoutine = new FillBufferRoutine();
+    @Autowired
+    RoomRoutine roomRoutine;
+    @Autowired
+    DataRoutine dataRoutine;
+    @Autowired
+    VictoryRoutine victoryRoutine;
+    @Autowired
+    FillBufferRoutine fillBufferRoutine;
 
     @Scheduled(cron = "0 0 6 * * *", zone = "Europe/Paris")
     public void runRoomRoutine() throws JsonProcessingException {
         log.info("RoomRoutine running...");
         roomRoutine.run(roomRepository, matchRepository, roomService);
     }
-    @Scheduled(cron = "*/7 * * * * *", zone = "Europe/Paris")
+   @Scheduled(cron = "*/7 * * * * *", zone = "Europe/Paris")
     public void runDataRoutine(){
         log.info("DataRoutine running...");
         dataRoutine.run(bufferRepository, areaService, competitionService, teamService, matchService);
