@@ -18,6 +18,7 @@ public class RoomDTO {
     private Date dateTo;
     private float balance;
     private boolean isCashPrice;
+    private String status;
     private List<MatchDTO> matches;
     private List<UserDTO> users;
 }

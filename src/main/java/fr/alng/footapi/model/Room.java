@@ -31,8 +31,9 @@ public class Room {
     private float balance;
     @Column(name = "is_cash_price")
     private boolean isCashPrice;
+    private String status;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable( name = "room_match",
             joinColumns = @JoinColumn( name = "room_id" ),
             inverseJoinColumns = @JoinColumn( name = "match_id" ) )

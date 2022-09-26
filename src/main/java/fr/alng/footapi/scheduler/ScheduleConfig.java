@@ -63,8 +63,10 @@ public class ScheduleConfig {
         fillBufferRoutine.run(bufferRepository);
     }
     @Scheduled(cron = "0 */5 * * * *", zone = "Europe/Paris")
-    public void runVictoryRoutine(){
+    public void runEveryFiveMinutes(){
         log.info("VictoryRoutine running...");
+        log.info("setStatusRoom running...");
         victoryRoutine.run(betService, matchService);
+        roomRoutine.setStatusRoom(roomService, roomRepository);
     }
 }
