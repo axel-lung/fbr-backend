@@ -51,7 +51,7 @@ public class VictoryRoutine {
             match.setWinnerTeam(new Team(2L));
         }
         MatchDTO matchDTO = matchConverter.convertEntityToDto(match, MatchDTO.class);
-        //matchDTO.setRooms(match.getRooms());
+        matchDTO.setRooms(match.getRooms());
         matchService.saveMatch(matchDTO);
     }
 }

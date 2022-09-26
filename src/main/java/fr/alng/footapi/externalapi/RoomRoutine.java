@@ -27,6 +27,7 @@ import java.util.List;
 public class RoomRoutine {
 
     private final ModelConverter<Room, RoomDTO> modelConverterRoom = new ModelConverter<>();
+    private static final String CREATED = "CREATED";
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public void run(RoomRepository roomRepository, MatchRepository matchRepository, RoomService roomService) {
@@ -46,7 +47,7 @@ public class RoomRoutine {
         roomDTO.setDateTo(Date.from(dateTo.atStartOfDay(ZoneId.systemDefault()).toInstant()));
         roomDTO.setName("Game" + dateFrom.getDayOfYear());
         roomDTO.setPlayerLimit(50);
-        roomDTO.setStatus("CREATED");
+        roomDTO.setStatus(CREATED);
         Room room = modelConverterRoom.convertDtoToEntity(roomDTO, Room.class);
         roomRepository.save(room);
 
@@ -82,9 +83,9 @@ public class RoomRoutine {
         List<Room> roomList = roomService.getRooms();
         roomList.forEach((Room room) -> {
 
-            if(room.getStatus().equalsIgnoreCase("CREATED") && isInPlayMatch(room).getStatus().equalsIgnoreCase("IN_PLAY")){
+            if(room.getStatus().equalsIgnoreCase(CREATED) && isInPlayMatch(room).getStatus().equalsIgnoreCase("IN_PLAY")){
                 room.setStatus("PLAYING");
-            } else if ((room.getStatus().equalsIgnoreCase("PLAYING") || room.getStatus().equalsIgnoreCase("CREATED")) && allMatchesFinished(room) == null) {
+            } else if ((room.getStatus().equalsIgnoreCase("PLAYING") || room.getStatus().equalsIgnoreCase(CREATED)) && allMatchesFinished(room) == null) {
                 room.setStatus("FINISHED");
             }
             roomRepository.save(room);
