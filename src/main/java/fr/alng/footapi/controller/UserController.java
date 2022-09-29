@@ -20,10 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -44,7 +41,7 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<User>getUserById(@PathVariable("id") Long id){
+    public ResponseEntity<Optional<User>> getUserById(@PathVariable("id") Long id){
         return ResponseEntity.ok().body(userService.getUserById(id));
     }
 

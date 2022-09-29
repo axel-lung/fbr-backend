@@ -5,6 +5,7 @@ import fr.alng.footapi.model.Role;
 import fr.alng.footapi.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
 
@@ -13,7 +14,7 @@ public interface UserService {
     void addRoleToUser(String username, String roleName);
     User getUser(String username);
     List<User> getUsers();
-    User getUserById(Long id);
+    Optional<User> getUserById(Long id);
     Boolean isUserInRoom(Long userId, Long roomId);
 
 }
